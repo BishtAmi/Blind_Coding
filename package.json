@@ -11,6 +11,7 @@
   "dependencies": {
     "@prisma/client": "^5.11.0",
     "ace-builds": "^1.32.9",
+    "axios": "^1.6.8",
     "express": "^4.19.2",
     "next": "14.1.4",
     "next-query-params": "^5.0.0",
