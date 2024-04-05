@@ -1,6 +1,12 @@
 import client from "@/db";
 import { NextRequest, NextResponse } from "next/server";
-export async function GET(req: NextRequest, { params }) {
+
+// Define a type for the params object
+interface Params {
+  qid: string;
+}
+
+export async function GET(req: NextRequest, { params }: { params: Params }) {
   try {
     // Extract qid from query parameters
     const { qid } = params;
