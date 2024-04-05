@@ -6,7 +6,7 @@ import axios from "axios";
 export default function Home() {
   const [username, setUsername] = useState("");
   const [ready, setReady] = useState(false);
-  const [data, setData] = useState("");
+  const [data, setData] = useState<any>(null); // Initialize with null
   const [starTime, setStart] = useState("");
   const [endTime, setEnd] = useState("");
   const [qid, setqid] = useState(1);
@@ -69,48 +69,54 @@ export default function Home() {
         </div>
       )}
       {!ready && (
-        <div
-          style={{ textAlign: "center", marginTop: "10px", marginRight: "5px" }}
-        >
+        <form onSubmit={handleReadyClick}>
           <div
             style={{
               textAlign: "center",
               marginTop: "10px",
-              fontSize: "20px",
-              marginBottom: "10px",
-              borderColor: "black",
+              marginRight: "5px",
             }}
           >
-            {/* <label htmlFor="language">Preferred Language:</label> */}
-            <select
-              onChange={handelSelect}
+            <div
               style={{
-                padding: "5px",
-                borderRadius: "5px",
-                border: "1px solid #ccc",
+                textAlign: "center",
+                marginTop: "10px",
+                fontSize: "20px",
+                marginBottom: "10px",
+                borderColor: "black",
               }}
             >
-              <option value={1}>Select Language:</option>
-              <option value={1}>C++</option>
-              <option value={2}>Java</option>
-              <option value={3}>python</option>
-              <option value={4}>Others</option>
-            </select>
+              {/* <label htmlFor="language">Preferred Language:</label> */}
+              <select
+                onChange={handelSelect}
+                style={{
+                  padding: "5px",
+                  borderRadius: "5px",
+                  border: "1px solid #ccc",
+                }}
+              >
+                <option value={1}>Select Language:</option>
+                <option value={1}>C++</option>
+                <option value={2}>Java</option>
+                <option value={3}>python</option>
+                <option value={4}>Others</option>
+              </select>
+            </div>
+            <button
+              type="submit"
+              style={{
+                padding: "10px 20px",
+                borderRadius: "5px",
+                border: "none",
+                backgroundColor: "#007bff",
+                color: "#fff",
+                cursor: "pointer",
+              }}
+            >
+              Are you ready?
+            </button>
           </div>
-          <button
-            onClick={handleReadyClick}
-            style={{
-              padding: "10px 20px",
-              borderRadius: "5px",
-              border: "none",
-              backgroundColor: "#007bff",
-              color: "#fff",
-              cursor: "pointer",
-            }}
-          >
-            Are you ready?
-          </button>
-        </div>
+        </form>
       )}
 
       {ready && (
