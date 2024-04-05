@@ -51,7 +51,7 @@ export default function QuestionForm() {
   return (
     <div>
       <h3>Question form</h3>
-      <h2>qid 1- C++ , 2-Java , 3-python , 4-other</h2>
+      <h2>qid 1- C++/Java , 2-python/other</h2>
       <div className="bg-gray-200 min-h-screen flex justify-center items-center">
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: "1rem" }}>

@@ -97,9 +97,9 @@ export default function Home() {
               >
                 <option value={1}>Select Language:</option>
                 <option value={1}>C++</option>
-                <option value={2}>Java</option>
-                <option value={3}>python</option>
-                <option value={4}>Others</option>
+                <option value={1}>Java</option>
+                <option value={2}>python</option>
+                <option value={2}>Others</option>
               </select>
             </div>
             <button
