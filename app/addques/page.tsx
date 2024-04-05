@@ -8,7 +8,7 @@ export default function QuestionForm() {
   const [input, setInput] = useState(""); // input as string
   const [output, setOutput] = useState(""); // output as string
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
     switch (name) {
       case "qid":
@@ -28,7 +28,7 @@ export default function QuestionForm() {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     const formData = {

@@ -21,7 +21,7 @@ export default function Home() {
     const value = +event.target.value; // Convert the string to a number
     setqid(value);
   };
-  const RandomQuestiongenrator = async (qid) => {
+  const RandomQuestiongenrator = async (qid: any) => {
     try {
       console.log("qid from client:", qid);
       const question = await axios.get(`/api/randomQ/${qid}`);

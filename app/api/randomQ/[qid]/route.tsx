@@ -10,7 +10,9 @@ export async function GET(req: NextRequest, { params }) {
     console.log("data:", allQuestions);
     // console.log("data:", allQuestionsJson);
     // Filter the data based on the qid field
-    const filteredQuestions = allQuestions.filter((item) => item.qid === qidInt);
+    const filteredQuestions = allQuestions.filter(
+      (item) => item.qid === qidInt
+    );
     console.log("filtered data:", filteredQuestions);
     if (filteredQuestions.length === 0) {
       return NextResponse.json({ error: "No questions found" });
