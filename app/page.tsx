@@ -53,7 +53,7 @@ export default function Home() {
         <div
           style={{ textAlign: "center", marginTop: "200px", fontSize: "17px" }}
         >
-          <input
+          {/* <input
             type="text"
             id="username"
             placeholder="Username"
@@ -65,7 +65,7 @@ export default function Home() {
               borderRadius: "5px",
               border: "1px solid #ccc",
             }}
-          />
+          /> */}
         </div>
       )}
       {!ready && (
@@ -150,9 +150,9 @@ export default function Home() {
               </p>
             </div>
             <br></br>
-            <button className="submitBtn" onClick={handelSubmit}>
+            {/* <button className="submitBtn" onClick={handelSubmit}>
               submit
-            </button>
+            </button> */}
           </div>
         </div>
       )}
