@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import client from "@/db";
-const cron = require("node-cron");
+
 
 export async function POST(req: NextRequest) {
   try {
@@ -39,22 +39,3 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(error);
   }
 }
-
-export async function deleteData() {
-  try {
-    const response = await client.userData.deleteMany();
-    console.log("data deleted", response);
-  } catch (error) {}
-}
-
-cron.schedule(
-  "0 12 * * *",
-  () => {
-    console.log("Running deleteData job at 12 PM");
-    deleteData();
-  },
-  {
-    scheduled: true,
-    timezone: "Asia/Kolkata", // Indian time
-  }
-);
