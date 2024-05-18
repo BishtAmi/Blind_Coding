@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
         output: body.output,
       },
     });
-    console.log(response);
+    //console.log(response);
     return NextResponse.json({ message: "data added" });
   } catch (error) {
     console.log(error);

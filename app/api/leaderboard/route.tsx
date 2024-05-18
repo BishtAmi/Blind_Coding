@@ -1,39 +1,27 @@
 import { NextRequest, NextResponse } from "next/server";
 import client from "@/db";
+const cron = require("node-cron");
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     console.log(body);
-    // (data.endTime - data.startTime) / 1000; // Calculate time difference in seconds
-    // console.log(timeDifference);
-    const startTime = new Date(body.startTime);
-    const endTime = new Date(body.endTime);
-    // Calculate the time difference in milliseconds
-    const timeDifferenceInMilliseconds =
-      endTime.getTime() - startTime.getTime();
-
-    // Convert the time difference into seconds (for example)
-    const timeDifference = timeDifferenceInMilliseconds / 1000;
-    console.log("diff: ", timeDifference);
-    const response = await client.userData.upsert({
-      where: { username: body.username },
-      update: {
-        username: body.username,
-        startTime: startTime.toISOString(),
-        endTime: endTime.toISOString(),
-      },
-      create: {
-        username: body.username,
-        startTime: startTime.toISOString(),
-        endTime: endTime.toISOString(),
-        timeDifference: timeDifference,
+    const { username, diff } = body;
+    // Save data to the database
+    const response = await client.userData.create({
+      data: {
+        username: username,
+        timeDifference: diff,
       },
     });
+
     console.log(response);
-    return NextResponse.json({ message: "data added" });
+
+    // Return a success message
+    return NextResponse.json({ message: "Data added successfully" });
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    // Return an error response
     return NextResponse.json(error);
   }
 }
@@ -51,3 +39,22 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(error);
   }
 }
+
+export async function deleteData() {
+  try {
+    const response = await client.userData.deleteMany();
+    console.log("data deleted", response);
+  } catch (error) {}
+}
+
+cron.schedule(
+  "0 12 * * *",
+  () => {
+    console.log("Running deleteData job at 12 PM");
+    deleteData();
+  },
+  {
+    scheduled: true,
+    timezone: "Asia/Kolkata", // Indian time
+  }
+);

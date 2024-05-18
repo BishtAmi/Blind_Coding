@@ -16,9 +16,7 @@ datasource db {
 // Define the UserData model
 model UserData {
   id              Int       @id @default(autoincrement())
-  username        String    @unique
-  startTime       DateTime
-  endTime         DateTime
+  username        String    
   timeDifference  Float
 }
 

@@ -30,7 +30,7 @@ export async function GET(req: NextRequest, { params }: { params: Params }) {
     // Select a random question based on the random index
     const randomQuestion = filteredQuestions[randomIndex];
 
-    console.log("questions:", filteredQuestions);
+    //console.log("questions:", filteredQuestions);
     return NextResponse.json({ randomQuestion });
   } catch (error) {
     return NextResponse.json(error);
