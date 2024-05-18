@@ -121,28 +121,36 @@ import axios from "axios";
 import { useSearchParams, useRouter } from "next/navigation";
 import Navbar from "../navbar/page";
 
+type QuestionData = {
+  question: string;
+  input: string;
+  output: string;
+  // Add any other properties here if necessary
+};
+
 export default function Problems() {
   const params = useSearchParams();
   const router = useRouter();
   const username = params.get("username");
   const qid = params.get("qid");
-  console.log("username", username);
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<QuestionData | null>(null);
   const [starTime, setStart] = useState("");
   const [endTime, setEnd] = useState("");
-  const [id, setId] = useState();
+  const [id, setId] = useState<number | null>(null);
+
   useEffect(() => {
     RandomQuestiongenrator(qid);
   }, [qid]);
+
   const handleReadyClick = (event: React.ChangeEvent<HTMLSelectElement>) => {
     event.preventDefault();
     const st = new Date();
     setStart(st.toISOString());
     RandomQuestiongenrator(qid);
   };
-  const RandomQuestiongenrator = async (qid) => {
+
+  const RandomQuestiongenrator = async (qid: any) => {
     try {
-      console.log("qid==>", qid);
       const question = await axios.get(`/api/randomQ/${qid}`);
       setData(question.data.randomQuestion);
       setId(question.data.randomQuestion.id);
@@ -182,17 +190,17 @@ export default function Problems() {
           <div className="rounded-lg text-sm p-6 bg-neutral-800">
             <div>
               <div className="font-semibold">Input: </div>
-              {data && data.input ? data.input : <p>Loading...</p>}
+              {data?.input ? data.input : <p>Loading...</p>}
             </div>
           </div>
-          <br></br>
+          <br />
           <div className="rounded-lg text-sm p-6 bg-neutral-800">
             <div>
               <div className="font-semibold">Output: </div>
-              {data && data.output ? data.output : <p>Loading...</p>}
+              {data?.output ? data.output : <p>Loading...</p>}
             </div>
           </div>
-          <br></br>
+          <br />
           <button
             className="w-auto bg-gray-800 text-white rounded-md px-4 py-2"
             type="submit"
