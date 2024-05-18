@@ -168,51 +168,49 @@ export default function Problems() {
   };
 
   return (
-    <Suspense>
-      <>
-        <Navbar />
-        <div className="h-screen flex items-center justify-center bg-black text-white">
-          <div className="problemSection overflow-x-hidden rounded p-5 md:w-5/12 mt-3 ml-1 overflow-scroll">
-            <div className="flex items-center justify-between sticky top-0 bg-black pt-3">
-              <div className="font-bold">Problem Statement</div>
-              <div className="flex">
-                <div className="text-green-400 m-3">Easy</div>
-                <div className="text-white pr-5 pl-1 font-bold"></div>
-              </div>
+    <>
+      <Navbar />
+      <div className="h-screen flex items-center justify-center bg-black text-white">
+        <div className="problemSection overflow-x-hidden rounded p-5 md:w-5/12 mt-3 ml-1 overflow-scroll">
+          <div className="flex items-center justify-between sticky top-0 bg-black pt-3">
+            <div className="font-bold">Problem Statement</div>
+            <div className="flex">
+              <div className="text-green-400 m-3">Easy</div>
+              <div className="text-white pr-5 pl-1 font-bold"></div>
             </div>
-
-            {data && data.question ? (
-              <div className="description pb-12">{data.question}</div>
-            ) : (
-              <div className="description pb-12">Loading...</div>
-            )}
-
-            <div className="mb-3 font-bold">Example:</div>
-            <div className="rounded-lg text-sm p-6 bg-neutral-800">
-              <div>
-                <div className="font-semibold">Input: </div>
-                {data?.input ? data.input : <p>Loading...</p>}
-              </div>
-            </div>
-            <br />
-            <div className="rounded-lg text-sm p-6 bg-neutral-800">
-              <div>
-                <div className="font-semibold">Output: </div>
-                {data?.output ? data.output : <p>Loading...</p>}
-              </div>
-            </div>
-            <br />
-            <button
-              className="w-auto bg-gray-800 text-white rounded-md px-4 py-2"
-              type="submit"
-              style={{ width: "50%" }}
-              onClick={handelSubmit}
-            >
-              Submit code
-            </button>
           </div>
+
+          {data && data.question ? (
+            <div className="description pb-12">{data.question}</div>
+          ) : (
+            <div className="description pb-12">Loading...</div>
+          )}
+
+          <div className="mb-3 font-bold">Example:</div>
+          <div className="rounded-lg text-sm p-6 bg-neutral-800">
+            <div>
+              <div className="font-semibold">Input: </div>
+              {data?.input ? data.input : <p>Loading...</p>}
+            </div>
+          </div>
+          <br />
+          <div className="rounded-lg text-sm p-6 bg-neutral-800">
+            <div>
+              <div className="font-semibold">Output: </div>
+              {data?.output ? data.output : <p>Loading...</p>}
+            </div>
+          </div>
+          <br />
+          <button
+            className="w-auto bg-gray-800 text-white rounded-md px-4 py-2"
+            type="submit"
+            style={{ width: "50%" }}
+            onClick={handelSubmit}
+          >
+            Submit code
+          </button>
         </div>
-      </>
-    </Suspense>
+      </div>
+    </>
   );
 }
