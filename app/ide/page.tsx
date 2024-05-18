@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
 import Navbar from "../navbar/page";
+import { Suspense } from "react";
 
 export default function QuestionForm() {
   const params = useSearchParams();
@@ -87,64 +88,66 @@ export default function QuestionForm() {
   };
 
   return (
-    <div>
-      <Navbar />
-      <h3>Code Editor</h3>
-      <div className="bg-gray-200 min-h-screen flex justify-center items-center">
-        <form onSubmit={handleSubmit}>
-          <div style={{ marginBottom: "5px", fontSize: "17px" }}>
-            <input
-              type="text"
-              id="username"
-              placeholder="Username"
-              required
-              value={username}
-              style={{
-                padding: "5px",
-                borderRadius: "5px",
-                border: "1px solid #ccc",
-              }}
-              onChange={(e) => setUsername(e.target.value)} // Allow updating the username
-            />
-          </div>
-          <div style={{ marginBottom: "1rem" }}>
-            <select
-              onChange={handelSelect}
-              style={{
-                padding: "5px",
-                borderRadius: "5px",
-                border: "1px solid #ccc",
-              }}
+    <Suspense>
+      <div>
+        <Navbar />
+        <h3>Code Editor</h3>
+        <div className="bg-gray-200 min-h-screen flex justify-center items-center">
+          <form onSubmit={handleSubmit}>
+            <div style={{ marginBottom: "5px", fontSize: "17px" }}>
+              <input
+                type="text"
+                id="username"
+                placeholder="Username"
+                required
+                value={username}
+                style={{
+                  padding: "5px",
+                  borderRadius: "5px",
+                  border: "1px solid #ccc",
+                }}
+                onChange={(e) => setUsername(e.target.value)} // Allow updating the username
+              />
+            </div>
+            <div style={{ marginBottom: "1rem" }}>
+              <select
+                onChange={handelSelect}
+                style={{
+                  padding: "5px",
+                  borderRadius: "5px",
+                  border: "1px solid #ccc",
+                }}
+              >
+                <option value="">Select Language:</option>
+                <option value="cpp">C++</option>
+                <option value="py">Python</option>
+              </select>
+            </div>
+            <div style={{ marginBottom: "1rem" }}>
+              <textarea
+                className="textarea"
+                name="code"
+                value={code}
+                onChange={handleChange}
+                placeholder="Write your code here"
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-auto bg-gray-800 text-white rounded-md px-4 py-2"
+              style={{ width: "50%" }}
             >
-              <option value="">Select Language:</option>
-              <option value="cpp">C++</option>
-              <option value="py">Python</option>
-            </select>
-          </div>
-          <div style={{ marginBottom: "1rem" }}>
-            <textarea
-              className="textarea"
-              name="code"
-              value={code}
-              onChange={handleChange}
-              placeholder="Write your code here"
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-auto bg-gray-800 text-white rounded-md px-4 py-2"
-            style={{ width: "50%" }}
-          >
-            Submit
-          </button>
-          <div>
-            <b className="font-semibold">
-              {status ? <p>Output:</p> : <p>Error:</p>}
-            </b>
-            {status ? data : err}
-          </div>
-        </form>
+              Submit
+            </button>
+            <div>
+              <b className="font-semibold">
+                {status ? <p>Output:</p> : <p>Error:</p>}
+              </b>
+              {status ? data : err}
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+    </Suspense>
   );
 }
