@@ -1,18 +1,17 @@
 import { exec } from "child_process";
 
-const executePy = (filepath: any) => {
+export const executePy = (filepath: string): Promise<string> => {
   return new Promise((resolve, reject) => {
-    exec(
-      `python ${filepath}`, // python filename
-      (error, stdout, stderr) => {
-        error && reject({ error, stderr }),
-          stderr && reject(stderr),
-          resolve(stdout);
+    exec(`python ${filepath}`, (error, stdout, stderr) => {
+      if (error) {
+        reject({ error, stderr });
+        return;
       }
-    );
+      if (stderr) {
+        reject(stderr);
+        return;
+      }
+      resolve(stdout);
+    });
   });
-};
-
-module.exports = {
-  executePy,
 };

@@ -1,18 +1,25 @@
-// pages/leaderboard.js
+// pages/leaderboard.tsx
 "use client";
-// pages/leaderboard.js
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../navbar/page";
+type LeaderboardEntry = {
+  username: string;
+  timeDifference: number;
+};
 
-const Leaderboard = () => {
-  const [leaderboardData, setLeaderboardData] = useState([]);
+const Leaderboard: React.FC = () => {
+  const [leaderboardData, setLeaderboardData] = useState<LeaderboardEntry[]>(
+    []
+  );
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("/api/leaderboard");
+        const response = await axios.get<LeaderboardEntry[]>(
+          "/api/leaderboard"
+        );
         setLeaderboardData(response.data);
       } catch (error) {
         console.error("Error fetching leaderboard data:", error);
