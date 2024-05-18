@@ -128,7 +128,7 @@ type QuestionData = {
   // Add any other properties here if necessary
 };
 
-export default function Problems() {
+function Problem() {
   const params = useSearchParams();
   const router = useRouter();
   const username = params.get("username");
@@ -212,5 +212,13 @@ export default function Problems() {
         </div>
       </div>
     </>
+  );
+}
+
+export default function Problems() {
+  return (
+    <Suspense>
+      <Problem />
+    </Suspense>
   );
 }

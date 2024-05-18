@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Navbar from "../navbar/page";
 import { Suspense } from "react";
 
-export default function QuestionForm() {
+function Question() {
   const params = useSearchParams();
   const id = params.get("id");
   const user = params.get("username");
@@ -148,6 +148,14 @@ export default function QuestionForm() {
           </form>
         </div>
       </div>
+    </Suspense>
+  );
+}
+
+export default function QuestionForm() {
+  return (
+    <Suspense>
+      <Question />
     </Suspense>
   );
 }
