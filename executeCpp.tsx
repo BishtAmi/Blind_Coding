@@ -1,9 +1,10 @@
 import fs from "fs";
 import path from "path";
 import { exec } from "child_process";
+import os from "os";
 
-const dirname = __dirname;
-const outputPath = path.join(dirname, "output");
+const tempDir = os.tmpdir(); // Use the system's temporary directory
+const outputPath = path.join(tempDir, "output");
 
 if (!fs.existsSync(outputPath)) {
   fs.mkdirSync(outputPath, { recursive: true });
@@ -16,7 +17,7 @@ export const executeCpp = (filepath: string): Promise<string> => {
   console.log("Output:", output); // Log the output file path
 
   return new Promise((resolve, reject) => {
-    const command = `g++ ${filepath} -o ${output} && cd ${outputPath} && ${jobId}.out`;
+    const command = `g++ ${filepath} -o ${output} && cd ${outputPath} && ./${jobId}.out`;
     exec(command, (error, stdout, stderr) => {
       if (error) {
         console.error("Compilation error:", error);
