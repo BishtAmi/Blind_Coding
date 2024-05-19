@@ -1,10 +1,9 @@
 import fs from "fs";
 import path from "path";
 import { v4 as uuid } from "uuid";
-import os from "os";
 
-const tempDir = os.tmpdir(); // Use the system's temporary directory
-const dirCode = path.join(tempDir, "code");
+const dirname = __dirname;
+const dirCode = path.join(dirname, "code");
 
 if (!fs.existsSync(dirCode)) {
   fs.mkdirSync(dirCode, { recursive: true });
