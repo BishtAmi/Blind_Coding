@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import { exec } from "child_process";
 
-const dirname = __dirname;
+const dirname = process.cwd();
 const outputPath = path.join(dirname, "output");
 
 if (!fs.existsSync(outputPath)) {
