@@ -2,12 +2,12 @@ import fs from "fs";
 import path from "path";
 import { exec } from "child_process";
 
-const dirname = process.cwd();
-const outputPath = path.join(dirname, "output");
+// const dirname = process.cwd();
+const outputPath = path.join("/tmp", "code");
 
-if (!fs.existsSync(outputPath)) {
-  fs.mkdirSync(outputPath, { recursive: true });
-}
+// if (!fs.existsSync(outputPath)) {
+//   fs.mkdirSync(outputPath, { recursive: true });
+// }
 
 export const executeCpp = (filepath: string): Promise<string> => {
   const jobId = path.basename(filepath).split(".")[0];

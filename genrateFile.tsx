@@ -2,12 +2,11 @@ import fs from "fs";
 import path from "path";
 import { v4 as uuid } from "uuid";
 
-const dirname = process.cwd();
-const dirCode = path.join(dirname, "code");
+const dirCode = path.join("/tmp", "code");
 
-if (!fs.existsSync(dirCode)) {
-  fs.mkdirSync(dirCode, { recursive: true });
-}
+// if (!fs.existsSync(dirCode)) {
+//   fs.mkdirSync(dirCode, { recursive: true });
+// }
 
 export const genrateFile = async (
   format: string,
