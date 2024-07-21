@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model QuesData {
+  id       Int    @id @unique @default(autoincrement())
+  question String @db.VarChar(1000)
+  input    String @db.VarChar(100)
+  output   String @db.VarChar(100)
+  qid      Int
+}
+
+model UserData {
+  id             Int    @id @default(autoincrement())
+  username       String
+  timeDifference Float
+}

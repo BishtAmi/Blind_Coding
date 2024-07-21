@@ -134,8 +134,7 @@ function Problem() {
   const username = params.get("username");
   const qid = params.get("qid");
   const [data, setData] = useState<QuestionData | null>(null);
-  const [starTime, setStart] = useState("");
-  const [endTime, setEnd] = useState("");
+  const [starTime, setStart] = useState(new Date());
   const [id, setId] = useState<number | null>(null);
 
   useEffect(() => {
@@ -144,8 +143,6 @@ function Problem() {
 
   const handleReadyClick = (event: React.ChangeEvent<HTMLSelectElement>) => {
     event.preventDefault();
-    const st = new Date();
-    setStart(st.toISOString());
     RandomQuestiongenrator(qid);
   };
 
@@ -161,7 +158,7 @@ function Problem() {
 
   const handelSubmit = async () => {
     try {
-      router.push(`/ide?id=${id}&&username=${username}`);
+      router.push(`/ide?id=${id}&&username=${username}&&startTime=${starTime}`);
     } catch (error) {
       console.log("error:", error);
     }

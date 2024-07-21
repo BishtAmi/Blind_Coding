@@ -1,17 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import client from "@/db";
 
-
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     console.log(body);
-    const { username, diff } = body;
+    const { username, totalsec } = body;
     // Save data to the database
     const response = await client.userData.create({
       data: {
         username: username,
-        timeDifference: diff,
+        timeDifference: totalsec,
       },
     });
 

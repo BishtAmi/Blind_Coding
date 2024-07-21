@@ -10,14 +10,15 @@ function Question() {
   const params = useSearchParams();
   const id = params.get("id");
   const user = params.get("username");
-
+  const st = params.get("startTime");
+  const startTime = new Date(st ? st : new Date());
+  //console.log("startTime is", typeof startTime);
   const [username, setUsername] = useState("");
 
   useEffect(() => {
     setUsername(user ?? ""); // Provide a fallback value if user is null
   }, [id, user]); // Include user in the dependency array to update username when it changes
 
-  const [startTime, setStart] = useState(new Date());
   const [endTime, setEnd] = useState(new Date());
   const [language, setLanguage] = useState(""); // language as number
   const [question, setQuestion] = useState(""); // question as string
@@ -42,13 +43,23 @@ function Question() {
 
   const handelSubmitLeader = async () => {
     try {
-      console.log("start", startTime);
-      console.log("end", endTime);
-      const diff = endTime.getTime() - startTime.getTime();
-      console.log("difference frontend:", diff);
+      const startSec = startTime.getSeconds();
+      const endSec = endTime.getSeconds();
+      const startMin = startTime.getMinutes();
+      const endMin = endTime.getMinutes();
+      const diff =
+        startMin > endMin ? 60 - startMin + endMin : endMin - startMin;
+      const totalsec =
+        diff * 60 + startSec > endSec
+          ? 60 - startSec + endSec
+          : endSec - startSec;
+      // console.log("startMin,startSec", startMin, startSec);
+      // console.log("endMin,endSec", endMin, endSec);
+
+      // console.log("difference frontend:", totalsec);
       const res = await axios.post("/api/leaderboard", {
         username,
-        diff,
+        totalsec,
       });
       console.log("leaderboard:", res);
     } catch (error) {
@@ -79,6 +90,7 @@ function Question() {
       else {
         setData(response.data.output);
         setEnd(new Date());
+        console.log("date at end", endTime);
         console.log("id", id);
         handelSubmitLeader();
       }
